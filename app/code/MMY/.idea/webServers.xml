@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="518657a9-13d8-4ff7-8afa-6a8f6be514db" name="192.168.1.2">
+        <fileTransfer rootFolder="/var/www/html/magento241.local/htdocs/" accessType="SFTP" host="192.168.1.2" port="22" sshConfigId="813a7ecb-0ed3-4cda-9e71-bf21e3923bbd" sshConfig="magento241@192.168.1.2:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

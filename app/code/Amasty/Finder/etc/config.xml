@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+-->
+<!--
+/**
+* Copyright © 2015 Amasty. All rights reserved.
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amfinder>
+            <general>
+                <category_search>0</category_search>
+                <partial_search>0</partial_search>
+                <separator>-</separator>
+                <suffix></suffix>
+                <reset_home>default</reset_home>
+            </general>
+            <advanced>
+                <universal>1</universal>
+                <auto_submit>0</auto_submit>
+                <clear_other_conditions>0</clear_other_conditions>
+                <redirect_single_product>0</redirect_single_product>
+                <is_chosen_enable>0</is_chosen_enable>
+                <show_active_finder_options>0</show_active_finder_options>
+                <name_finder_options_tab>Compatibility</name_finder_options_tab>
+                <compatible_finder>0</compatible_finder>
+            </advanced>
+            <import>
+                <archive_lifetime>30</archive_lifetime>
+                <max_rows_per_import>1000</max_rows_per_import>
+            </import>
+        </amfinder>
+    </default>
+</config>

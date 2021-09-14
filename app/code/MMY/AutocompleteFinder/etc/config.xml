@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MMY_AutocompleteFinder Module Registration
+ *
+ * @category    AutocompleteFinder
+ * @package     AutocompleteFinder
+ * @author      MMY
+ *
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mmy_finder>
+            <general>
+                <is_enable>1</is_enable>
+                <debug_enable>0</debug_enable>
+            </general>
+        </mmy_finder>
+    </default>
+</config>

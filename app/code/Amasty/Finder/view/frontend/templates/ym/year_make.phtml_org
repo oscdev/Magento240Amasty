@@ -1,0 +1,68 @@
+<style>
+
+    input {
+        margin-bottom: 38px;
+        padding: 5px 5px;
+    }
+</style>
+<?php
+/**
+ * @var $block \Amasty\Finder\Block\Ym\Yearmakelist
+ */
+?>
+<?php $a = $this->getAllFinders(); ?>
+<?php /*print_r($block->getAllFinders())*/?>
+<div class = "osc-form1">
+    <h1>Select to find your exhaust:</h1>
+    <form name="osc-form" action='/action_page.php'>
+
+        <select id="finder_a" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('MODEL'));?></option>
+        </select>
+        <br><br>
+        <select id="finder_a" class="amfinder-select">
+            <option value="1"><?= $block->escapeHtml(__('SUBMODEL'));?></option>
+        </select>
+        <br><br>
+        <select id="finder" class="amfinder-select">
+            <option value="2"><?= $block->escapeHtml(__('ENGINE'));?></option>
+        </select>
+        <br><br>
+        <select id="finder" class="amfinder-select">
+            <option value="3"><?= $block->escapeHtml(__('BODY'));?></option>
+        </select>
+        <br><br>
+
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+<script type="text/javascript">
+    require(['jquery'], function (jQuery) {
+        //alert('welcome');
+        var url1 = '<?= $block->getAllFinders()?>'
+       // alert(url1);
+        jQuery('.finder_a').html('');  //html element where you need to bind the data
+        var parseData = jQuery.parseJSON(url1); // parse the data
+        var html = '';
+        jQuery.each(parseData, function (i, v) {   // get data using each loop
+            html += "<option>" + v.name+ "</option>";
+        });
+    });
+</script>
+<!--<script type="text/javascript">
+    require(['jquery'], function (jQuery) {
+
+        jQuery(document).ready(function () {
+
+            jQuery('.dropdown-title').each(function (index, fileobj) {
+                fileobj.addEventListener("change", finder, false);
+            });
+        });
+
+
+    });
+
+
+</script>-->

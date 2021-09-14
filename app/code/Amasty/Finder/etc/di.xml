@@ -1,0 +1,35 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\Finder\Api\Data\DropdownInterface" type="Amasty\Finder\Model\Dropdown" />
+    <preference for="Amasty\Finder\Api\DropdownRepositoryInterface" type="Amasty\Finder\Model\Repository\DropdownRepository" />
+    <preference for="Amasty\Finder\Api\Data\FinderInterface" type="Amasty\Finder\Model\Finder" />
+    <preference for="Amasty\Finder\Api\FinderRepositoryInterface" type="Amasty\Finder\Model\Repository\FinderRepository" />
+    <preference for="Amasty\Finder\Api\Data\ImportLogInterface" type="Amasty\Finder\Model\ImportLog" />
+    <preference for="Amasty\Finder\Api\ImportLogRepositoryInterface" type="Amasty\Finder\Model\Repository\ImportLogRepository" />
+    <preference for="Amasty\Finder\Api\Data\ImportErrorsInterface" type="Amasty\Finder\Model\ImportErrors" />
+    <preference for="Amasty\Finder\Api\ImportErrorsRepositoryInterface" type="Amasty\Finder\Model\Repository\ImportErrorsRepository" />
+    <preference for="Amasty\Finder\Api\Data\ImportHistoryInterface" type="Amasty\Finder\Model\ImportHistory" />
+    <preference for="Amasty\Finder\Api\ImportHistoryRepositoryInterface" type="Amasty\Finder\Model\Repository\ImportHistoryRepository" />
+    <preference for="Amasty\Finder\Api\Data\UniversalInterface" type="Amasty\Finder\Model\Universal" />
+    <preference for="Amasty\Finder\Api\UniversalRepositoryInterface" type="Amasty\Finder\Model\Repository\UniversalRepository" />
+    <preference for="Amasty\Finder\Api\Data\ValueInterface" type="Amasty\Finder\Model\Value" />
+    <preference for="Amasty\Finder\Api\ValueRepositoryInterface" type="Amasty\Finder\Model\Repository\ValueRepository" />
+    <preference for="Amasty\Finder\Api\Data\MapInterface" type="Amasty\Finder\Model\Map" />
+    <preference for="Amasty\Finder\Api\MapRepositoryInterface" type="Amasty\Finder\Model\Repository\MapRepository" />
+    <preference for="Amasty\Finder\Api\Data\FinderOptionInterface" type="Amasty\Finder\Model\FinderOption" />
+    <preference for="Amasty\Finder\Api\ProductRepositoryInterface" type="Amasty\Finder\Model\Repository\ProductRepository" />
+    <type name="Magento\Elasticsearch\Model\Adapter\DataMapper\ProductDataMapper">
+        <plugin name="Amasty_Finder::AdditionalDataMapper" type="Amasty\Finder\Plugin\Elasticsearch\Model\Adapter\AdditionalDataMapper" />
+    </type>
+    <type name="Magento\Elasticsearch\Model\Adapter\BatchDataMapper\ProductDataMapper">
+        <plugin name="Amasty_Finder::AdditionalBatchDataMapper" type="Amasty\Finder\Plugin\Elasticsearch\Model\Adapter\AdditionalBatchDataMapper" />
+    </type>
+    <type name="Magento\Elasticsearch\Model\Adapter\FieldMapper\ProductFieldMapper">
+        <plugin name="Amasty_Finder::AdditionalFieldMapper" type="Amasty\Finder\Plugin\Elasticsearch\Model\Adapter\AdditionalFieldMapper" />
+    </type>
+    <type name="Magento\Elasticsearch\Elasticsearch5\Model\Adapter\FieldMapper\ProductFieldMapperProxy">
+        <plugin name="Amasty_Finder::AdditionalFieldMapperElasticSearch5" type="Amasty\Finder\Plugin\Elasticsearch\Elasticsearch5\Model\Adapter\FieldMapper\AdditionalFieldMapper" />
+    </type>
+    <type name="Magento\PageCache\Model\Varnish\VclTemplateLocator">
+        <plugin name="Amasty_Finder::VclTemplateLocator" type="Amasty\Finder\Plugin\PageCache\Model\Varnish\VclTemplateLocator" />
+    </type>
+</config>

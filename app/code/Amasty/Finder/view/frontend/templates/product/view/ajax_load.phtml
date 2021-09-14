@@ -1,0 +1,14 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+?>
+<div id="amfinder_options"></div>
+
+<script type="text/javascript">
+    require(['jquery', 'Amasty_Finder/js/amFinderAjaxOptions'], function ($) {
+        $('#amfinder_options').amFinderAjaxOptions(<?= $block->getJsonConfig() ?>);
+    });
+</script>

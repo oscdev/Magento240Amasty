@@ -1,0 +1,87 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+?>
+<?php
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+
+use Amasty\Finder\Model\Source\DisplayType;
+
+/**
+ * @var $block \Amasty\Finder\Block\Form
+ */
+?>
+<div class="amfinder-common-wrapper amfinder-<?= $block->escapeHtml($block->getFinder()->getTemplate()); ?>
+     <?= $block->getHideClassName() ? 'amfinder-hide' : ''?>"
+     id="<?= 'amfinder_' . (int)$block->getFinder()->getId(); ?>"
+     location="<?= $block->escapeHtml($block->getLocation()); ?>">
+    <form method="post" action="<?= $block->escapeUrl($block->getActionUrl()); ?>">
+        <input type="hidden" name="finder_id" value="<?= $block->getId() ?>"/>
+        <input type="hidden" name="back_url" value="<?= $block->getBackUrl() ?>"/>
+        <input type="hidden" name="reset_url" value="<?= $block->getResetUrl() ?>"/>
+        <input type="hidden" name="category_id" value="<?= $block->getCurrentCategoryId() ?>"/>
+        <input type="hidden" name="current_apply_url"
+               value="<?= $block->escapeUrl($block->getCurrentApplyUrlEncoded()) ?>"/>
+        <div class="amfinder-title" data-amfinder-js="title">
+            <?= $block->escapeHtml($block->getFinder()->getName()) ?>
+        </div>
+        <ul class="amfinder-toggle">
+            <?php foreach ($block->getFinder()->getDropdowns() as $dropdown) : ?>
+                <li style="width: <?= $block->getDropdownWidth() ?>%" class="am-item -list-item">
+                    <div class="dropdown-title"><?= $block->escapeHtml(__($dropdown->getName())) ?></div>
+                    <div class="dropdown-element amshopby-clearer">
+                        <?php if ($dropdown->getDisplayType() == DisplayType::DROPDOWN) : ?>
+                            <div class="amfinder-select-wrapper">
+                                <select <?= $block->getDropdownAttributes($dropdown) ?> data-amfinder-js="select"
+                                        class="amfinder-select">
+                                    <?= $block->getDropdownHtml($block->getFinder(), $dropdown); ?>
+                                </select>
+                            </div>
+                        <?php else : ?>
+                            <div class="amfinder-dropdown-wrapper" data-amfinder-js="wrapper">
+                                <div class="amfinder-dropdown" <?= $block->getDropdownAttributes($dropdown) ?>
+                                     data-amfinder-js="select">
+                                    <span data-amfinder-js="text">
+                                        <?= $block->escapeHtml(__('Please Select ...')); ?>
+                                    </span>
+                                    <span class="amfinder-reset"
+                                          title="<?= $block->escapeHtml(__('Reset option')); ?>"
+                                          data-amfinder="reset"></span>
+                                </div>
+                                <div class="amfinder-details" data-amfinder-js="select-details">
+                                    <?= $block->getDropdownHtml($block->getFinder(), $dropdown); ?>
+                                </div>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                </li>
+            <?php endforeach ?>
+            <li class="last -list-item">
+                <div class="amfinder-buttons <?= ($block->isButtonsVisible() ? '' : 'no-display') ?>"
+                     data-amfinder-js="buttons">
+                    <button class="button" name="reset" value="1" title="<?= $block->escapeHtml(__('Reset')); ?>"
+                            type="submit">
+                        <?= $block->escapeHtml(__('Reset')); ?>
+                    </button>
+                    <button class="button action primary" title="<?= $block->escapeHtml(__('Find')); ?>"
+                            type="submit">
+                        <?= $block->escapeHtml(__('Find')) ?>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </form>
+</div>
+<script type="text/javascript">
+    require(['jquery', 'Amasty_Finder/js/amfinder'], function ($) {
+        var finderConfig = <?= $block->getJsonConfig(); ?>;
+
+        $("#" + finderConfig.containerId).amfinder(finderConfig);
+    });
+</script>
+<br/>

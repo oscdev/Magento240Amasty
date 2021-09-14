@@ -1,0 +1,419 @@
+<?php
+/**
+ * MMY_AutocompleteFinder Module Registration
+ *
+ * @category    AutocompleteFinder
+ * @package     AutocompleteFinder
+ * @author      MMY
+ *
+ */
+namespace MMY\AutocompleteFinder\Controller\Search\Ajax;
+
+use Magento\Framework\App\Action\HttpGetActionInterface as HttpGetActionInterface;
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
+use Magento\Search\Model\AutocompleteInterface;
+use Magento\Framework\Controller\ResultFactory;
+use MMY\AutocompleteFinder\Helper\Data;
+use Amasty\Finder\Model\ResourceModel\Value\CollectionFactory;
+use Amasty\Finder\Model\ResourceModel\Dropdown\CollectionFactory as DropdownCollectionFactory;
+use Amasty\Finder\Model\ResourceModel\Map\CollectionFactory as MapCollectionFactory;
+
+class Suggest extends \Magento\Search\Controller\Ajax\Suggest
+{
+    /**
+     * @var  \Magento\Search\Model\AutocompleteInterface
+     */
+    private $autocomplete;
+
+    /**
+     * @var CollectionFactory
+     */
+    protected $collectionFactory;
+
+    /**
+     * @var DropdownCollectionFactory
+     */
+    protected $dropdownCollectionFactory;
+
+    /**
+     * @var MapCollectionFactory
+     */
+    protected $mapCollectionFactory;
+
+    /**
+     * @var Data
+     */
+    protected $helperData;
+
+    /**
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Search\Model\AutocompleteInterface $autocomplete
+     */
+    public function __construct(
+        Context $context,
+        AutocompleteInterface $autocomplete,
+        CollectionFactory $collectionFactory,
+        DropdownCollectionFactory $dropdownCollectionFactory,
+        MapCollectionFactory $mapCollectionFactory,
+        Data $helperData
+
+    ) {
+        $this->autocomplete = $autocomplete;
+        $this->collectionFactory = $collectionFactory;
+        $this->mapCollectionFactory = $mapCollectionFactory;
+        $this->dropdownCollectionFactory = $dropdownCollectionFactory;
+        $this->helperData = $helperData;
+        parent::__construct($context,$autocomplete,$collectionFactory);
+    }
+
+    /**
+     * @return \Magento\Framework\Controller\ResultInterface
+     */
+    public function execute()
+    {
+        if (!$this->getRequest()->getParam('q', false)) {
+            /** @var \Magento\Framework\Controller\Result\Redirect $resultRedirect */
+            $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+            $resultRedirect->setUrl($this->_url->getBaseUrl());
+            return $resultRedirect;
+        }
+        $querySearchText = $this->getRequest()->getParam('q', false);
+
+        if($this->helperData->getModuleIsEnabled()) {
+            $collection = $this->collectionFactory->create();
+            $collection->addFieldToSelect('value_id');
+            $collection->addFieldToSelect('dropdown_id');
+            $collection->addFieldToSelect('name');
+            $collection->addFieldToSelect('parent_id');
+            $collection->addFieldToFilter('name', array('like' => '%' . $querySearchText . '%'));
+            $this->helperData->log("dowpdown query :".$collection->getSelect());
+            $finderValueData = [];
+            $data1 = [];
+            if (count($collection) > 0) {
+                $this->helperData->log("Line number : ".__LINE__);
+                foreach ($collection as $collectionItem) {
+                    $finderValueData[$collectionItem->getValueId()] = ['value_id' => $collectionItem->getValueId(), 'dropdown_id' => $collectionItem->getDropDownId(),'name' => $collectionItem->getName(),'parent_id' => $collectionItem->getParentId()];
+                }
+            }
+            $this->helperData->log("Line number : ".__LINE__);
+            $this->helperData->log("finderValueData : ".print_r($finderValueData,1));
+            $this->helperData->log("finderValueDatakey : ".print_r(array_keys($finderValueData),1));
+
+            if (!empty($finderValueData)) {
+                $finderValueIds = array_keys($finderValueData);
+                $collectionMakeModel = $this->collectionFactory->create();
+                $collectionMakeModel->addFieldToSelect('value_id');
+                $collectionMakeModel->addFieldToSelect('dropdown_id');
+                $collectionMakeModel->addFieldToSelect('parent_id');
+                $collectionMakeModel->addFieldToSelect('name');
+                $collectionMakeModel->addFieldToFilter('parent_id', array('in' => $finderValueIds));
+                $makeModelData = [];
+                $this->helperData->log("makemodel query :".$collectionMakeModel->getSelect());
+                if (count($collectionMakeModel) > 0) {
+                    foreach ($collectionMakeModel as $collectionItemsData) {
+                        $makeModelData[$collectionItemsData['value_id']] = ['dropdown_id'=> $collectionItemsData['dropdown_id'],'name' => $collectionItemsData['name'],'parent_id' => $collectionItemsData['parent_id'],'value_id' => $collectionItemsData['value_id']];
+                    }
+                }
+
+                $this->helperData->log("makeModelData : ".print_r($makeModelData,1));
+                $dowpdownData = [];
+                $mapProductdata = [];
+                $dropDownCollection = $this->dropdownCollectionFactory->create();
+                $dropDownCollection->addFieldToSelect('dropdown_id');
+                $dropDownCollection->addFieldToSelect('name');
+                foreach ($finderValueData as $data) {
+                    $dropDownCollection->addFieldToFilter('dropdown_id', array('in' => $data['dropdown_id']));
+                    $this->helperData->log("dowpdown query :".$dropDownCollection->getSelect());
+                    if (count($dropDownCollection) > 0) {
+                        foreach ($dropDownCollection as $collectionItem) {
+                            $dowpdownData[$collectionItem['dropdown_id']] = ['name' => $collectionItem['name']];
+                        }
+                    }
+                }
+
+                if (!empty($makeModelData)) {
+                    $makeModelValueIds = array_keys($makeModelData);
+                    $collectionModel = $this->collectionFactory->create();
+                    $collectionModel->addFieldToSelect('value_id');
+                    $collectionModel->addFieldToSelect('dropdown_id');
+                    $collectionModel->addFieldToSelect('parent_id');
+                    $collectionModel->addFieldToSelect('name');
+                    $collectionModel->addFieldToFilter('parent_id', array('in' => $makeModelValueIds));
+                    $modelData = [];
+                    $this->helperData->log("makemodel query :" . $collectionModel->getSelect());
+                    if (count($collectionModel) > 0) {
+                        foreach ($collectionModel as $collectionData) {
+                            $modelData[$collectionData['value_id']] = ['dropdown_id' => $collectionData['dropdown_id'], 'name' => $collectionData['name'], 'parent_id' => $collectionData['parent_id'], 'value_id' => $collectionData['value_id']];
+                        }
+                    }
+
+                    $this->helperData->log("modelData : " . print_r($modelData, 1));
+                }
+
+                if(count(array_keys($modelData))>0) {
+                    $finderMakeModelValueIds = array_keys($modelData);
+                    $mapCollection = $this->mapCollectionFactory->create();
+                    $mapCollection->addFieldToSelect('pid');
+                    $mapCollection->addFieldToSelect('sku');
+                    $mapCollection->addFieldToSelect('value_id');
+                    $mapCollection->addFieldToFilter('value_id', array('in' => $finderMakeModelValueIds));
+                    $this->helperData->log("map collection query :" . $mapCollection->getSelect());
+                    if (count($mapCollection) > 0) {
+                        $this->helperData->log("Line number : " . __LINE__);
+                        foreach ($mapCollection as $mapCollectionItem) {
+                            $mapProductdata[] = ['pid' => $mapCollectionItem['pid'], 'sku'=> $mapCollectionItem['sku'],'value_id'=> $mapCollectionItem['value_id']];
+                        }
+                    }
+                }elseif(count(array_keys($makeModelData))>0) {
+                    $MakeModelValueIds = array_keys($makeModelData);
+                    $mapCollection = $this->mapCollectionFactory->create();
+                    $mapCollection->addFieldToSelect('pid');
+                    $mapCollection->addFieldToSelect('sku');
+                    $mapCollection->addFieldToSelect('value_id');
+                    $mapCollection->addFieldToFilter('value_id', array('in' => $MakeModelValueIds));
+                    $this->helperData->log("map collection query :" . $mapCollection->getSelect());
+                    if (count($mapCollection) > 0) {
+                        $this->helperData->log("Line number : " . __LINE__);
+                        foreach ($mapCollection as $mapCollectionItem) {
+                            $mapMakeProductdata[] = ['pid' => $mapCollectionItem['pid'], 'sku'=> $mapCollectionItem['sku'],'value_id'=> $mapCollectionItem['value_id']];
+                        }
+                    }
+                }
+
+                $this->helperData->log("dowpdownData : ".print_r($dowpdownData,1));
+                $this->helperData->log("mapProductdata : ".print_r($mapProductdata,1));
+
+            }
+        }
+
+        $autocompleteData = $this->autocomplete->getItems();
+        $responseData = [];
+
+        if(!empty($modelData)) {
+            foreach ($modelData as $modeData) {
+                foreach ($makeModelData as $makeModeData) {
+                    if ($modeData['parent_id'] == $makeModeData['value_id']) {
+                        $modelName = $makeModeData['name'];
+                        $modParentId = $makeModeData['parent_id'];
+
+                        foreach ($finderValueData as $finderData) {
+                            if ($modParentId == $finderData['value_id']) {
+                                $finderName = $finderData['name'];
+                            }
+                        }
+                    }
+                }
+
+                $mapProductCount = 0;
+                foreach ($mapProductdata as $mapProdData) {
+                    if ($mapProdData['value_id'] == $modeData['value_id']) {
+                        $mapProductCount = $mapProductCount + 1;
+                    }
+                }
+                $responseData[] = array(
+                    'title' => $finderName . '-' . $modelName .'-'. $modeData['name'],
+                    'num_results' => $mapProductCount,
+                );
+            }
+        }elseif(!empty($makeModelData))
+        {
+            foreach ($makeModelData as $makeModeData) {
+                foreach ($finderValueData as $finderData) {
+                    if ($makeModeData['parent_id'] == $finderData['value_id']) {
+                        $finderName = $finderData['name'];
+                    }
+                }
+
+                $mapProdCount = 0;
+                foreach ($mapMakeProductdata as $mapProd) {
+                    if ($mapProd['value_id'] == $makeModeData['value_id']) {
+                        $mapProdCount = $mapProdCount + 1;
+                    }
+                }
+                $responseData[] = array(
+                    'title' => $finderName . '-' . $makeModeData['name'],
+                    'num_results' => $mapProdCount,
+                );
+            }
+        }elseif(!empty($finderValueData)){
+            $findermapProdCount = 0;
+            foreach($finderValueData as $finderData){
+                $responseData[] = array(
+                    'title' => $finderData['name'],
+                    'num_results' => $findermapProdCount,
+                );
+            }
+        }else {
+            foreach ($autocompleteData as $resultItem) {
+                $responseData[] = $resultItem->toArray();
+            }
+        }
+
+        /*  if($this->helperData->getModuleIsEnabled()) {
+              $this->helperData->setRequestQueryText($querySearchText);
+              $finderValueData = $this->helperData->getFinderValueDataBySearch($querySearchText);
+              $makeModelData = $this->helperData->getFinderMakeModelData();
+              $modelData = $this->helperData->getFinderModelData();
+
+              $this->helperData->log("Line number : ".__LINE__);
+              $this->helperData->log("finderValueData111 : ".print_r($finderValueData,1));
+              $this->helperData->log("finderValueDatakey : ".print_r(array_keys($finderValueData),1));
+
+              if (!empty($finderValueData)) {
+                  $this->helperData->log("makeModelData : ".print_r($makeModelData,1));
+                  $dowpdownData = [];
+                  $mapProductdata = [];
+                  $dropDownCollection = $this->dropdownCollectionFactory->create();
+                  $dropDownCollection->addFieldToSelect('dropdown_id');
+                  $dropDownCollection->addFieldToSelect('name');
+                  foreach ($finderValueData as $data) {
+                      $dropDownCollection->addFieldToFilter('dropdown_id', array('in' => $data['dropdown_id']));
+                      $this->helperData->log("dowpdown query :".$dropDownCollection->getSelect());
+                      if (count($dropDownCollection) > 0) {
+                          foreach ($dropDownCollection as $collectionItem) {
+                              $dowpdownData[$collectionItem['dropdown_id']] = ['name' => $collectionItem['name']];
+                          }
+                      }
+                  }
+
+                  if(count(array_keys($modelData))>0) {
+                      $finderMakeModelValueIds = array_keys($modelData);
+                      $mapCollection = $this->mapCollectionFactory->create();
+                      $mapCollection->addFieldToSelect('pid');
+                      $mapCollection->addFieldToSelect('sku');
+                      $mapCollection->addFieldToSelect('value_id');
+                      $mapCollection->addFieldToFilter('value_id', array('in' => $finderMakeModelValueIds));
+                      $this->helperData->log("map collection query :" . $mapCollection->getSelect());
+                      if (count($mapCollection) > 0) {
+                          $this->helperData->log("Line number : " . __LINE__);
+                          foreach ($mapCollection as $mapCollectionItem) {
+                              $mapProductdata[] = ['pid' => $mapCollectionItem['pid'], 'sku'=> $mapCollectionItem['sku'],'value_id'=> $mapCollectionItem['value_id']];
+                          }
+                      }
+                  }elseif(count(array_keys($makeModelData))>0) {
+                      $finderMakeModelValueIds = array_keys($makeModelData);
+                      $mapCollection = $this->mapCollectionFactory->create();
+                      $mapCollection->addFieldToSelect('pid');
+                      $mapCollection->addFieldToSelect('sku');
+                      $mapCollection->addFieldToSelect('value_id');
+                      $mapCollection->addFieldToFilter('value_id', array('in' => $finderMakeModelValueIds));
+                      $this->helperData->log("map collection query :" . $mapCollection->getSelect());
+                      if (count($mapCollection) > 0) {
+                          $this->helperData->log("Line number : " . __LINE__);
+                          foreach ($mapCollection as $mapCollectionItem) {
+                              $mapMakeProductdata[] = ['pid' => $mapCollectionItem['pid'], 'sku'=> $mapCollectionItem['sku'],'value_id'=> $mapCollectionItem['value_id']];
+                          }
+                      }
+                  }
+
+                  $this->helperData->log("dowpdownData : ".print_r($dowpdownData,1));
+                  $this->helperData->log("mapProductdata : ".print_r($mapProductdata,1));
+
+              }
+
+          }
+          $autocompleteData = $this->autocomplete->getItems();
+          $responseData = [];
+          $finderName = "";
+          $modelName = "";
+          if(!empty($modelData)) {
+              foreach ($modelData as $modeData) {
+                  foreach ($makeModelData as $makeModeData) {
+                      if ($modeData['parent_id'] == $makeModeData['value_id']) {
+                          $modelName = $makeModeData['name'];
+                          $modParentId = $makeModeData['parent_id'];
+
+                          foreach ($finderValueData as $finderData) {
+                              if ($modParentId == $finderData['value_id']) {
+                                  $finderName = $finderData['name'];
+                              }
+                          }
+                      }
+                  }
+
+                  $mapProductCount = 0;
+                  foreach ($mapProductdata as $mapProdData) {
+                      if ($mapProdData['value_id'] == $modeData['value_id']) {
+                          $mapProductCount = $mapProductCount + 1;
+                      }
+                  }
+                  $responseData[] = array(
+                      'title' => $finderName . '-' . $modelName .'-'. $modeData['name'],
+                      'num_results' => $mapProductCount,
+                  );
+              }
+          }elseif(!empty($makeModelData))
+          {
+              foreach ($makeModelData as $makeModeData) {
+                  foreach ($finderValueData as $finderData) {
+                      if ($makeModeData['parent_id'] == $finderData['value_id']) {
+                          $finderName = $finderData['name'];
+                      }
+                  }
+
+                  $mapProdCount = 0;
+                  foreach ($mapMakeProductdata as $mapProd) {
+                      if ($mapProd['value_id'] == $makeModeData['value_id']) {
+                          $mapProdCount = $mapProdCount + 1;
+                      }
+                  }
+                  $responseData[] = array(
+                      'title' => $finderName . '-' . $makeModeData['name'],
+                      'num_results' => $mapProdCount,
+                  );
+              }
+          }elseif(!empty($finderValueData)){
+              $findermapProdCount = 0;
+              foreach($finderValueData as $finderData){
+                  $responseData[] = array(
+                      'title' => $finderData['name'],
+                      'num_results' => $findermapProdCount,
+                  );
+              }
+          }else {
+              foreach ($autocompleteData as $resultItem) {
+                  $responseData[] = $resultItem->toArray();
+              }
+          }
+          if(empty($makeModelData)){
+              foreach($finderValueData as $finderData){
+                  $responseData[] = array(
+                      'title' => $finderData['name'],
+                      'num_results' => '',
+                  );
+              }
+          }
+
+          if(!empty($makeModelData)) {
+              foreach ($makeModelData as $makeModeData) {
+                  foreach ($finderValueData as $finderData) {
+                      if ($finderData['value_id'] == $makeModeData['parent_id']) {
+                          $finderName = $finderData['name'];
+                          $finderDropdownId = $finderData['dropdown_id'];
+                      }
+                  }
+
+                  $mapProductCount = 0;
+                  foreach ($mapProductdata as $mapProdData) {
+                      if ($mapProdData['value_id'] == $makeModeData['value_id']) {
+                          $mapProductCount = $mapProductCount + 1;
+                      }
+                  }
+                  $responseData[] = array(
+                      'title' => $finderName . '-' . $makeModeData['name'],
+                      'num_results' => $mapProductCount,
+                  );
+              }
+          }elseif(empty($finderValueData)){
+              foreach ($autocompleteData as $resultItem) {
+                  $responseData[] = $resultItem->toArray();
+              }
+          }*/
+
+        /** @var \Magento\Framework\Controller\Result\Json $resultJson */
+        $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
+        $resultJson->setData($responseData);
+        return $resultJson;
+    }
+}

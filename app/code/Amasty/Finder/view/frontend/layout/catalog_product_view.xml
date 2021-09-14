@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+-->
+
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.details">
+            <block class="Amasty\Finder\Block\Product\View\AjaxLoad" name="amfinder-product-attributes" template="Amasty_Finder::product/view/ajax_load.phtml" group="detailed_info">
+                <arguments>
+                    <argument name="sort_order" xsi:type="string">100</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

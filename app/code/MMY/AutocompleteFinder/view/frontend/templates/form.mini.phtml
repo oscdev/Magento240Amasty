@@ -1,0 +1,96 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+?>
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $helper \Magento\Search\Helper\Data */
+/** @var $configProvider \Magento\Search\ViewModel\ConfigProvider */
+$helper = $this->helper(\Magento\Search\Helper\Data::class);
+$configProvider = $block->getData('configProvider');
+$helperData = $this->helper(\MMY\AutocompleteFinder\Helper\Data::class);
+$yearMakeModel = $this->getRequest()->getParam('q');
+if(!empty($yearMakeModel))
+{
+    $yearMakeModelParam = strtolower( $yearMakeModel );
+    $helperData->getActionUrl($yearMakeModelParam);
+}
+?>
+<div class="block block-search">
+    <div class="block block-title"><strong><?= $block->escapeHtml(__('Search')) ?></strong></div>
+    <div class="block block-content">
+        <form class="form minisearch" id="search_mini_form" action="<?= $block->escapeUrl($helper->getResultUrl()) ?>" method="get">
+            <div class="field search">
+                <label class="label" for="search" data-role="minisearch-label">
+                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                </label>
+                <div class="control">
+                    <input id="search"
+                           data-mage-init='{"quickSearch":{
+                                "formSelector":"#search_mini_form",
+                                "url":"<?= /* @escapeNotVerified */ $block->getUrl('search/ajax/suggest', ['_secure' => $block->getRequest()->isSecure()]) ?>",
+                                "destinationSelector":"#search_autocomplete"}
+                           }'
+                           type="text"
+                           name="<?= /* @escapeNotVerified */ $helper->getQueryParamName() ?>"
+                           value="<?= /* @escapeNotVerified */ $helper->getEscapedQueryText() ?>"
+                           placeholder="<?= /* @escapeNotVerified */ __('Search entire store here...') ?>"
+                           class="input-text"
+                           maxlength="<?= /* @escapeNotVerified */ $helper->getMaxQueryLength() ?>"
+                           role="combobox"
+                           aria-haspopup="false"
+                           aria-autocomplete="both"
+                           autocomplete="off"/>
+                    <div id="search_autocomplete" class="search-autocomplete"></div>
+                    <?= $block->getChildHtml() ?>
+                </div>
+            </div>
+            <div class="actions">
+                <button id="mmy-search-button" type="submit"
+                    title="<?= $block->escapeHtml(__('Search')) ?>"
+                    class="action search"
+                    aria-label="Search"
+                >
+                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'domReady!',
+    ], function ($, script) {
+        $(document).ready(function () {
+        $('#search').on('keyup keypress', function(event) {
+            //alert('befor keypress');
+            if (event.which === 13) {
+                alert('keypress enter');
+                event.preventDefault();
+            }
+        });
+        });
+    });
+</script>
+<!--<script type="text/javascript">
+     require(['jquery'], function (jQuery) {
+ jQuery('#search').keypress(function(e){
+        var year=this.value;
+         year.trim();
+         year=parseInt(year);
+       // alert(parseInt(this.value));
+      if ( e.which == 13 ){
+       if(year>1950){
+           alert('AA');
+           return false;
+       }
+       }
+ })
+                 });
+</script>-->

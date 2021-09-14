@@ -1,0 +1,157 @@
+<style>
+    input {
+        margin-bottom: 38px;
+        padding: 5px 5px;
+    }
+</style>
+<?php
+/**
+ * @var $block \Amasty\Finder\Block\Make\Makelist
+ */
+?>
+<?php $a = $this->getAllFinders();
+//$Finder = ['Year','Model'];
+$keys = array_keys($a);
+//print_R($a);
+$lastElement = '';
+$lastElement = array_pop($keys);
+//$lastElement = 'Model';
+
+?>
+<div class="osc-form1">
+    <h1>Select to find your exhaust:</h1>
+    <form id="osc-form" name="osc-form" action="/action_page.php">
+        <input type="hidden" value="<?= $block->getUrlInfo() ?>" name="urls" id="input-id">
+        <?php $jj = 0;
+        $select = '';
+        foreach ($a as $dropdownName => $value) {
+			/*if(!in_array($dropdownName,$Finder))
+				continue;*/
+			
+		  if(count($value)>0){
+		?>
+            <?php $select = ($jj == 0) ? '' : ' disabled';
+            $jj++;
+            $lastElementVal = 'no';
+			
+            if($lastElement == $dropdownName) $lastElementVal = 'last';
+
+            ?>
+            <input type="hidden" id="totaldropdown" value="<?= count($a) ?>" name="totaldrop">
+            <input type="hidden" id="position_<?= $jj ?>" value="<?= $jj ?>" name="position_<?= $dropdownName; ?>">
+            <select id="<?= $dropdownName; ?>" class="dropdown-title" name="<?= $dropdownName; ?>" <?= $select ?>>
+                <option value="0"> <?= $dropdownName ?></option>
+                <?php foreach ($value as $i => $dropdownOptions) : ?>
+                    <span data-amfinder-js="text">
+                                        <?= $block->escapeHtml(__('Please Select ...')); ?>
+                        </span>
+                    <option value="<?= $dropdownOptions ?>"><?= $block->escapeHtml(__($dropdownOptions)); ?></option>
+                <?php endforeach ?>
+            </select>
+            <br><br>
+        <?php }
+		}?>
+    </form>
+</div>
+
+<script type="text/javascript">
+    require(['jquery'], function (jQuery) {
+
+        jQuery(document).ready(function () {
+
+            jQuery('.dropdown-title').each(function (index, fileobj) {
+
+                fileobj.addEventListener("change", finder, false);
+
+            });
+        });
+
+        function finder() {
+			if(this.value==0){
+             return false;
+			}
+            var url = '<?= $block->getAjaxUrl() ?>';
+            var data = window.document.getElementById('input-id').value + '-'+ this.value;
+
+            current_position=jQuery("input[name=position_"+this.name+"]").val();
+            var isLast=(jQuery('#totaldropdown').val()==current_position);
+            var newData =  jQuery('#osc-form').serialize()+"&position="+isLast;
+            current_position=parseInt(current_position);
+            var current_finder=this.name;
+            newData = newData+'&current_finder='+current_finder;
+            if(jQuery('#position_'+(current_position+1))){
+                var nextSelect=jQuery('#position_'+(current_position+1));
+            }
+          
+          if(isLast==false){
+
+                nextDrop1=jQuery('#position_'+(current_position+1)).attr('name');
+                var nextDrop= nextDrop1.replace('position_','');
+                newData = newData+"&nextFinder="+nextDrop;
+
+            }
+			    
+
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                datatype: "text",
+                enctype: 'text',
+                processData: false,
+                data:newData,
+                showLoader: true,
+                cache: false,
+                success: function (response) {
+
+                    
+                    //jQuery('#'+nextDrop).append(response);
+                    var i=0;
+                    jQuery('#'+nextDrop+' option').each(function(a,b)
+                    {
+                        if(i!=0){
+                            b.remove();
+                        }
+                        i=i+1;
+                    });
+
+
+                    optionObject=jQuery.parseJSON(response);
+					
+					if(typeof (optionObject.option) !='undefined'){
+                        jQuery('#'+nextDrop).removeAttr('disabled');
+					}
+                    /*if(optionObject.next !=''){
+                        jQuery('#'+optionObject.next).removeAttr('disabled');
+                        
+					}*/
+					/*if(optionObject.next ==''){
+                        jQuery('#'+nextDrop).removeAttr('disabled');
+                        
+					}*/
+                    if(optionObject.redirect_url !=''){
+                        window.location.href=optionObject.redirect_url;
+
+                    }
+					 if(typeof (optionObject.option) !='undefined'){
+                    if(optionObject.option.length>0){
+                        for(jj=0;jj<optionObject.option.length;jj++){
+                            jQuery('#'+nextDrop).append(optionObject.option[jj]);
+                        }
+                    }
+					 }
+
+                }
+            });
+            return false;
+        }
+    });
+
+
+</script>
+
+
+
+
+
+
+

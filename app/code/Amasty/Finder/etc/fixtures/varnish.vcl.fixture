@@ -1,0 +1,9 @@
+    # Bypass pages where finder applied
+    if (req.http.Cookie ~ "amfinder_routes=") {
+        set req.http.PageUrlKey = regsub(req.url, "(\.|\?)+.*$", "");
+        set req.http.PageUrlKeyPrepared = regsuball(req.http.PageUrlKey, "/", "_");
+
+        if (std.strstr(req.http.Cookie, req.http.PageUrlKeyPrepared)) {
+            return (pass);
+        }
+    }

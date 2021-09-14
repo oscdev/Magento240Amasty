@@ -1,0 +1,271 @@
+"Product Parts Filnders","Product Parts Filnders"
+"Add New Item","Add New Item"
+"Save and Continue Edit","Save and Continue Edit"
+"Edit Parts Finder '%1'","Edit Parts Finder '%1'"
+"New Parts Finder","New Parts Finder"
+"Finder Information","Finder Information"
+Dropdowns,Dropdowns
+"Dropdown #%1","Dropdown #%1"
+Name,Name
+Sort,Sort
+"alphabetically, asc","alphabetically, asc"
+"alphabetically, desc","alphabetically, desc"
+"numerically, asc","numerically, asc"
+"numerically, desc","numerically, desc"
+Range,Range
+No,No
+Yes,Yes
+"Display Type","Display Type"
+Import,Import
+View,View
+"Import History","Import History"
+"Add Images To The Filter Options","Add Images To The Filter Options"
+"Import Images","Import Images"
+"For import please upload images to the following directory: pub/media/amasty/finder/images_tmp","For import please upload images to the following directory: pub/media/amasty/finder/images_tmp"
+"Download Sample File","Download Sample File"
+"CSV File","CSV File"
+General,General
+Title,Title
+"Number of Dropdowns","Number of Dropdowns"
+Template,Template
+Horizontal,Horizontal
+Vertical,Vertical
+"The `horizontal` option is responsive and set by default","The `horizontal` option is responsive and set by default"
+"Custom Destination URL","Custom Destination URL"
+"It determines the page the Finder will redirect customers to when the Find button is pressed. 
+                        Enter category URL, e.g. special-category.html to redirect search results to one category.","It determines the page the Finder will redirect customers to when the Find button is pressed. 
+                        Enter category URL, e.g. special-category.html to redirect search results to one category."
+"Add Finder to the Default Category","Add Finder to the Default Category"
+"Keep 'Yes' to get the Finder working properly at the home and cms pages.","Keep 'Yes' to get the Finder working properly at the home and cms pages."
+"Finder block visibility on the Default Category","Finder block visibility on the Default Category"
+Hide,Hide
+Show,Show
+"Keep 'Hide' to not display this finder block on the default category on the frontend. 
+                        It is useful when there are several finders added to the default category but you need to 
+                        display only one of them at the frontend.","Keep 'Hide' to not display this finder block on the default category on the frontend. 
+                        It is useful when there are several finders added to the default category but you need to 
+                        display only one of them at the frontend."
+"Add Finder to the Search Page","Add Finder to the Search Page"
+"Add the finder block in","Add the finder block in"
+"Place the product finder in particular themes, categories, and other locations.
+                        Possible options: sidebar.main, content, content.top, footer.","Place the product finder in particular themes, categories, and other locations.
+                        Possible options: sidebar.main, content, content.top, footer."
+Categories,Categories
+"Code for inserting","Code for inserting"
+"Code for inserting in Layout Update XML","Code for inserting in Layout Update XML"
+Products,Products
+"Add New Product","Add New Product"
+"Remove all products","Remove all products"
+"Are you sure?","Are you sure?"
+SKU,SKU
+"Universal Products","Universal Products"
+"Universal Products Import","Universal Products Import"
+"Import Universal Products","Import Universal Products"
+"To work with universal products please set 'Use universal products' 
+                    to 'Yes' at <a href=""%1"">configuration</a>","To work with universal products please set 'Use universal products' 
+                    to 'Yes' at <a href=""%1"">configuration</a>"
+"Delete Existing Data","Delete Existing Data"
+"Finder Options","Finder Options"
+"Please update Amasty Base module. Re-upload it and replace all the files.","Please update Amasty Base module. Re-upload it and replace all the files."
+"Edit product","Edit product"
+"Value Information","Value Information"
+Undefined,Undefined
+"%1 Image","%1 Image"
+"Delete Image","Delete Image"
+"Please specify the Parts Finder ID","Please specify the Parts Finder ID"
+"Please specify an existing Parts Finder ID","Please specify an existing Parts Finder ID"
+Loading...,Loading...
+Finder,Finder
+"You deleted the item.","You deleted the item."
+"We can't delete item right now. Please review the log and try again.","We can't delete item right now. Please review the log and try again."
+"We can't find a item to delete.","We can't find a item to delete."
+"This item no longer exists.","This item no longer exists."
+"Edit Parts Finder `%1`","Edit Parts Finder `%1`"
+"Add new Parts Finder","Add new Parts Finder"
+"Record does not exist.","Record does not exist."
+"The wrong item is specified.","The wrong item is specified."
+"Product Parts Finder","Product Parts Finder"
+Amasty,Amasty
+Items,Items
+"You deleted the finder(s).","You deleted the finder(s)."
+"We can't delete finder(s) right now. Please review the log and try again.","We can't delete finder(s) right now. Please review the log and try again."
+"We can't find a file(s) to delete.","We can't find a file(s) to delete."
+"You deleted the file(s).","You deleted the file(s)."
+"We can't delete file(s) right now. Please review the log and try again.","We can't delete file(s) right now. Please review the log and try again."
+"You deleted the history file(s).","You deleted the history file(s)."
+"We can't delete history file(s) right now. Please review the log and try again.","We can't delete history file(s) right now. Please review the log and try again."
+"We can't find a history file(s) to delete.","We can't find a history file(s) to delete."
+"You have deleted the product(s).","You have deleted the product(s)."
+"We can't delete the product(s) right now. Please review the log and try again.","We can't delete the product(s) right now. Please review the log and try again."
+"We can't find the product(s) to delete.","We can't find the product(s) to delete."
+"You deleted the universal product(s).","You deleted the universal product(s)."
+"We can't delete the universal product(s) right now. Please review the log and try again.","We can't delete the universal product(s) right now. Please review the log and try again."
+"We can't find a the universal product(s) to delete.","We can't find a the universal product(s) to delete."
+"You deleted all products in the finder.","You deleted all products in the finder."
+"We can't delete products right now. Please review the log and try again.","We can't delete products right now. Please review the log and try again."
+"We can't find a products to delete.","We can't find a products to delete."
+"File already running","File already running"
+"File not exists","File not exists"
+"File imported successfully","File imported successfully"
+" with %1 errors"," with %1 errors"
+"The file is invalid, please see <a class=""show-import-errors"" data-url=""%1"">errors log</a> 
+                        for details.","The file is invalid, please see <a class=""show-import-errors"" data-url=""%1"">errors log</a> 
+                        for details."
+"Imported %1 rows of total %2 rows (%3%)","Imported %1 rows of total %2 rows (%3%)"
+"You saved the item.","You saved the item."
+"Something went wrong while saving the item data. Please review the error log.","Something went wrong while saving the item data. Please review the error log."
+"The file has been uploaded","The file has been uploaded"
+", all other files in the queue have been removed",", all other files in the queue have been removed"
+"You have deleted the item.","You have deleted the item."
+"Record does not exist","Record does not exist"
+"Edit Product","Edit Product"
+"Add new Product","Add new Product"
+"Record has been successfully saved","Record has been successfully saved"
+"Import File should contain only one column.","Import File should contain only one column."
+"Incorrect column name.","Incorrect column name."
+"Import File should contain %1 column(s).","Import File should contain %1 column(s)."
+"Incorrect file type. CSV needed","Incorrect file type. CSV needed"
+"The file is empty.","The file is empty."
+"Upload is impossible, there is a file replace.csv","Upload is impossible, there is a file replace.csv"
+"'The file with the same name already exists! ' .","'The file with the same name already exists! ' ."
+"Error occurred save file","Error occurred save file"
+"File %1 is invalid. %2","File %1 is invalid. %2"
+"Count of columns does not much count of dropdowns.","Count of columns does not much count of dropdowns."
+"Sku values should be placed in the last column","Sku values should be placed in the last column"
+Uploaded,Uploaded
+Processing,Processing
+"lines of","lines of"
+errors,errors
+"Replace Products","Replace Products"
+"Add Products","Add Products"
+"Unable to save dropdown with ID %1. Error: %2","Unable to save dropdown with ID %1. Error: %2"
+"Unable to save new dropdown. Error: %1","Unable to save new dropdown. Error: %1"
+"dropdown with specified ID ""%1"" not found.","dropdown with specified ID ""%1"" not found."
+"Unable to remove dropdown with ID %1. Error: %2","Unable to remove dropdown with ID %1. Error: %2"
+"Unable to remove dropdown. Error: %1","Unable to remove dropdown. Error: %1"
+"Unable to save finder with ID %1. Error: %2","Unable to save finder with ID %1. Error: %2"
+"Unable to save new finder. Error: %1","Unable to save new finder. Error: %1"
+"Unable to remove finder with ID %1. Error: %2","Unable to remove finder with ID %1. Error: %2"
+"Unable to remove finder. Error: %1","Unable to remove finder. Error: %1"
+"Unable to save importErrors with ID %1. Error: %2","Unable to save importErrors with ID %1. Error: %2"
+"Unable to save new importErrors. Error: %1","Unable to save new importErrors. Error: %1"
+"importErrors with specified ID ""%1"" not found.","importErrors with specified ID ""%1"" not found."
+"Unable to remove importErrors with ID %1. Error: %2","Unable to remove importErrors with ID %1. Error: %2"
+"Unable to remove importErrors. Error: %1","Unable to remove importErrors. Error: %1"
+"Unable to save importHistory with ID %1. Error: %2","Unable to save importHistory with ID %1. Error: %2"
+"Unable to save new importHistory. Error: %1","Unable to save new importHistory. Error: %1"
+"importHistory with specified ID ""%1"" not found.","importHistory with specified ID ""%1"" not found."
+"Unable to remove importHistory with ID %1. Error: %2","Unable to remove importHistory with ID %1. Error: %2"
+"Unable to remove importHistory. Error: %1","Unable to remove importHistory. Error: %1"
+"Unable to save importLog with ID %1. Error: %2","Unable to save importLog with ID %1. Error: %2"
+"Unable to save new importLog. Error: %1","Unable to save new importLog. Error: %1"
+"importLog with specified ID ""%1"" not found.","importLog with specified ID ""%1"" not found."
+"Unable to remove importLog with ID %1. Error: %2","Unable to remove importLog with ID %1. Error: %2"
+"Unable to remove importLog. Error: %1","Unable to remove importLog. Error: %1"
+"Unable to save map with ID %1. Error: %2","Unable to save map with ID %1. Error: %2"
+"Unable to save new map. Error: %1","Unable to save new map. Error: %1"
+"map with specified ID ""%1"" not found.","map with specified ID ""%1"" not found."
+"Unable to remove map with ID %1. Error: %2","Unable to remove map with ID %1. Error: %2"
+"Unable to remove map. Error: %1","Unable to remove map. Error: %1"
+"Unable to save universal with ID %1. Error: %2","Unable to save universal with ID %1. Error: %2"
+"Unable to save new universal. Error: %1","Unable to save new universal. Error: %1"
+"universal with specified ID ""%1"" not found.","universal with specified ID ""%1"" not found."
+"Unable to remove universal with ID %1. Error: %2","Unable to remove universal with ID %1. Error: %2"
+"Unable to remove universal. Error: %1","Unable to remove universal. Error: %1"
+"Unable to save value with ID %1. Error: %2","Unable to save value with ID %1. Error: %2"
+"Unable to save new value. Error: %1","Unable to save new value. Error: %1"
+"value with specified ID ""%1"" not found.","value with specified ID ""%1"" not found."
+"Unable to remove value with ID %1. Error: %2","Unable to remove value with ID %1. Error: %2"
+"Unable to remove value. Error: %1","Unable to remove value. Error: %1"
+"Invalid extension for image %1. Please use one from: jpeg, jpg, png, gif","Invalid extension for image %1. Please use one from: jpeg, jpg, png, gif"
+"File does not exist: %1","File does not exist: %1"
+"All Categories","All Categories"
+"Currently Applied Finder","Currently Applied Finder"
+Dropdown,Dropdown
+Label,Label
+"Image and Label","Image and Label"
+Image,Image
+"To Home Page","To Home Page"
+"To The Same Page","To The Same Page"
+"To The Result Page","To The Result Page"
+"At Least One Finder Value is Selected","At Least One Finder Value is Selected"
+"All Finder Values are Selected","All Finder Values are Selected"
+"Invalid vcl configuration provided","Invalid vcl configuration provided"
+"Upload Files","Upload Files"
+"Drag & Drop CSV Files Here","Drag & Drop CSV Files Here"
+or,or
+"Click to open the file Browser","Click to open the file Browser"
+"Click to add Files","Click to add Files"
+"Please mind that import functionality supports files with UTF-8 encoding only. For more information please refer to","Please mind that import functionality supports files with UTF-8 encoding only. For more information please refer to"
+"Magento help center","Magento help center"
+"Failed to Upload file #","Failed to Upload file #"
+"File %1 cannot be added: must be an CSV","File %1 cannot be added: must be an CSV"
+"If you are experiencing problems with importing the file, please decrease the value: Stores -> Configuration -> Amasty -> Product Parts Finder -> Import -> Max Rows per Import","If you are experiencing problems with importing the file, please decrease the value: Stores -> Configuration -> Amasty -> Product Parts Finder -> Import -> Max Rows per Import"
+Progress,Progress
+STOP,STOP
+"List Errors","List Errors"
+"Please Select ...","Please Select ..."
+"Reset option","Reset option"
+Reset,Reset
+Find,Find
+"No active finders or options.","No active finders or options."
+CLOSE,CLOSE
+Information,Information
+"Display `Find` Button when","Display `Find` Button when"
+"Apply Filter for Current Category only","Apply Filter for Current Category only"
+"Global Custom Destination URL","Global Custom Destination URL"
+"Eg. special-category.html In most cases you don't need to set it. Useful when you want to
+                        redirect all search results to one category.","Eg. special-category.html In most cases you don't need to set it. Useful when you want to
+                        redirect all search results to one category."
+"Reset Finder","Reset Finder"
+Advanced,Advanced
+"Use `Universal` Products","Use `Universal` Products"
+"Show `Universal` Products Last","Show `Universal` Products Last"
+"Start Search when Value in the Last Dropdown is Selected","Start Search when Value in the Last Dropdown is Selected"
+"Clear other (Previous) Finders Conditions","Clear other (Previous) Finders Conditions"
+"Redirect to Product Page when One Product in Result","Redirect to Product Page when One Product in Result"
+"Enable 'Chosen' Plugin","Enable 'Chosen' Plugin"
+"Chosen is a jQuery plugin that makes select boxes much more user-friendly and equips
+                        it with the search. Read more <a href=""https://harvesthq.github.io/chosen/"">here</a>","Chosen is a jQuery plugin that makes select boxes much more user-friendly and equips
+                        it with the search. Read more <a href=""https://harvesthq.github.io/chosen/"">here</a>"
+"Display Compatible Options At The Product Page","Display Compatible Options At The Product Page"
+"Set 'Yes' to display finder filter options product is compatible with at the product page in the separate tab.","Set 'Yes' to display finder filter options product is compatible with at the product page in the separate tab."
+"Finder For Compatibility Tab","Finder For Compatibility Tab"
+"Specify which Product Finder content to display in Compatibility tab.","Specify which Product Finder content to display in Compatibility tab."
+"Import History Lifetime (days)","Import History Lifetime (days)"
+"Max Rows per Import","Max Rows per Import"
+"Recommended value is 1000. There may be import problems with larger value","Recommended value is 1000. There may be import problems with larger value"
+"Created at","Created at"
+Line,Line
+Message,Message
+Delete,Delete
+"Are you sure you want to delete the selected product(s)?","Are you sure you want to delete the selected product(s)?"
+CSV,CSV
+"Are you sure you want to delete
+                                    the selected product(s)?
+                                ","Are you sure you want to delete
+                                    the selected product(s)?
+                                "
+"Are you sure you want to delete
+                                    the selected file(s)?
+                                ","Are you sure you want to delete
+                                    the selected file(s)?
+                                "
+"File Name","File Name"
+Started,Started
+Finished,Finished
+Errors,Errors
+Action,Action
+"Files are sorted by priority
+                            ","Files are sorted by priority
+                            "
+Path,Path
+State,State
+Mode,Mode
+Run,Run
+"Are you sure you want to delete
+                                    the selected finder(s)?
+                                ","Are you sure you want to delete
+                                    the selected finder(s)?
+                                "
+ID,ID

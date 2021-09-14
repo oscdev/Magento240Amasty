@@ -1,0 +1,80 @@
+<style>
+    input {
+        margin-bottom: 38px;
+        padding: 5px 5px;
+    }
+</style>
+<?php
+/**
+ * @var $block \Amasty\Finder\Block\Make\Makelist
+ */
+?>
+<?php $a = $this->getAllFinders(); ?>
+<?php /*print_r($block->getAllFinders())*/?>
+<div class = "osc-form1">
+    <h1>Select to find your exhaust:</h1>
+    <form name="osc-form" action='/action_page.php'>
+        <!--    <input type="text" value="<?/*= $block->getUrlInfo() */?>" name="urls" id="input-id">-->
+        <select id="finder" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('YEAR'));?></option>
+        </select>
+        <br><br>
+
+        <select id="finder" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('MODEL'));?></option>
+        </select>
+        <br><br>
+        <select id="finder" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('SUBMODEL'));?></option>
+        </select>
+        <br><br>
+        <select id="finder" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('ENGINE'));?></option>
+        </select>
+        <br><br>
+        <select id="finder" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('BODY'));?></option>
+        </select>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+<script type="text/javascript">
+    require(['jquery'], function (jQuery) {
+
+        jQuery(document).ready(function () {
+
+            jQuery('.amfinder-select').each(function (index, fileobj) {
+                fileobj.addEventListener("change", finder, false);
+            });
+        });
+
+        function finder() {
+            var url = '<?= $block->getAjaxUrl() ?>';
+            var data =  window.document.getElementsByName('urls').values();
+            data = data+this.value
+            alert(this.value);
+            jQuery.ajax({
+                url: url,
+                type: "POST",
+                contentType: false,
+                datatype:"json",
+                enctype: 'text/plain',
+                processData: false,
+                data: data
+                showLoader: true,
+                cache: false,
+                success: function (response) {
+                    console.log(response.output);
+                }
+            });
+            return false;
+        }
+    });
+
+
+</script>
+
+
+
