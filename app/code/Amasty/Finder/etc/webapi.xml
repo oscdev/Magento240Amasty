@@ -1,0 +1,239 @@
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/amasty_finder/dropdown" method="POST">
+        <service class="Amasty\Finder\Api\DropdownRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/dropdown/:id" method="PUT">
+        <service class="Amasty\Finder\Api\DropdownRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/dropdown/:id" method="DELETE">
+        <service class="Amasty\Finder\Api\DropdownRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/dropdown" method="GET">
+        <service class="Amasty\Finder\Api\DropdownRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/dropdown/all" method="GET">
+        <service class="Amasty\Finder\Api\DropdownRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+
+    <route url="/V1/amasty_finder/finder" method="POST">
+        <service class="Amasty\Finder\Api\FinderRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/finder/:id" method="PUT">
+        <service class="Amasty\Finder\Api\FinderRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/finder/:id" method="DELETE">
+        <service class="Amasty\Finder\Api\FinderRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/finder" method="GET">
+        <service class="Amasty\Finder\Api\FinderRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/finder/all" method="GET">
+        <service class="Amasty\Finder\Api\FinderRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/importLog/:id" method="DELETE">
+        <service class="Amasty\Finder\Api\ImportLogRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/importLog" method="GET">
+        <service class="Amasty\Finder\Api\ImportLogRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/importLog/all" method="GET">
+        <service class="Amasty\Finder\Api\ImportLogRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/importLogErrors/:id" method="DELETE">
+        <service class="Amasty\Finder\Api\ImportErrorsRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/importLogErrors" method="GET">
+        <service class="Amasty\Finder\Api\ImportErrorsRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/importLogErrors/all" method="GET">
+        <service class="Amasty\Finder\Api\ImportErrorsRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/importLogHistory/:id" method="DELETE">
+        <service class="Amasty\Finder\Api\ImportHistoryRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/importLogHistory" method="GET">
+        <service class="Amasty\Finder\Api\ImportHistoryRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/importLogHistory/all" method="GET">
+        <service class="Amasty\Finder\Api\ImportHistoryRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+
+    <route url="/V1/amasty_finder/universal" method="POST">
+        <service class="Amasty\Finder\Api\UniversalRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/universal/:id" method="PUT">
+        <service class="Amasty\Finder\Api\UniversalRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/universal/:id" method="DELETE">
+        <service class="Amasty\Finder\Api\UniversalRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/universal" method="GET">
+        <service class="Amasty\Finder\Api\UniversalRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/universal/all" method="GET">
+        <service class="Amasty\Finder\Api\UniversalRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+
+    <route url="/V1/amasty_finder/value" method="POST">
+        <service class="Amasty\Finder\Api\ValueRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/value/:id" method="PUT">
+        <service class="Amasty\Finder\Api\ValueRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/saveProduct" method="POST">
+        <service class="Amasty\Finder\Api\ValueRepositoryInterface" method="saveOption"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/value/:id/:finder" method="DELETE">
+        <service class="Amasty\Finder\Api\ValueRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/value/:id" method="DELETE">
+        <service class="Amasty\Finder\Api\ValueRepositoryInterface" method="deleteOnlyValue"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/value" method="GET">
+        <service class="Amasty\Finder\Api\ValueRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/value/all" method="GET">
+        <service class="Amasty\Finder\Api\ValueRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/map" method="POST">
+        <service class="Amasty\Finder\Api\MapRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/map/:id" method="PUT">
+        <service class="Amasty\Finder\Api\MapRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/map/saveMap" method="POST">
+        <service class="Amasty\Finder\Api\MapRepositoryInterface" method="saveMap"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/map/saveMap:id" method="PUT">
+        <service class="Amasty\Finder\Api\MapRepositoryInterface" method="saveMap"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/map/:id" method="DELETE">
+        <service class="Amasty\Finder\Api\MapRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/map" method="GET">
+        <service class="Amasty\Finder\Api\MapRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/map/all" method="GET">
+        <service class="Amasty\Finder\Api\MapRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_finder/product/find" method="POST">
+        <service class="Amasty\Finder\Api\ProductRepositoryInterface" method="getProductsByFinderValues" />
+        <resources>
+            <resource ref="Amasty_Finder::finder" />
+        </resources>
+    </route>
+</routes>

@@ -1,0 +1,32 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+?>
+<?php
+$finderOptions = $block->getFinderOptions();
+?>
+<?php if (count($finderOptions) > 0): ?>
+    <div class="additional-attributes-wrapper table-wrapper">
+        <table class="data table" id="amfinder-product-attribute-specs-table">
+            <thead data-part="head">
+            <?php foreach ($block->getDropdownNames() as $name) : ?>
+                <th class="label"><?= $this->escapeHtml(__($name)) ?></th>
+            <?php endforeach; ?>
+            </thead>
+            <tbody>
+            <?php foreach ($finderOptions as $option) : ?>
+                <tr>
+                    <?php foreach ($option as $value) : ?>
+                        <td class="col data"><?= $value ?></td>
+                    <?php endforeach; ?>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php else: ?>
+    <span class="label"><?= __('No active finders or options.') ?></span>
+<?php endif; ?>

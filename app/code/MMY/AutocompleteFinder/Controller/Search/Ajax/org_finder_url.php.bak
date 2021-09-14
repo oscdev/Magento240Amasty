@@ -1,0 +1,65 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', true);
+ini_set('display_startup_errors', true);
+ini_set('memory_limit', '5G');
+
+
+use Magento\Framework\App\Bootstrap;
+require '/var/www/html/app/bootstrap.php';
+
+$bootstrap = Bootstrap::create(BP, $_SERVER);
+
+$objectManager = $bootstrap->getObjectManager();
+
+$state = $objectManager->get('Magento\Framework\App\State');
+$state->setAreaCode('frontend');
+
+  $bootstrap = Bootstrap::create(BP, $_SERVER);
+
+    $objectManager = $bootstrap->getObjectManager();
+    $resource = $objectManager->get('\Magento\Framework\App\ResourceConnection');
+    $finderRepository = $objectManager->create('\Amasty\Finder\Model\Repository\ValueRepository');
+    $readConnection = $resource->getConnection();
+       
+ $totalOptions= $readConnection->fetchAll("select value_id,dropdown_id,name,parent_id from amasty_finder_value where dropdown_id=16 order by value_id asc");
+  
+    foreach($totalOptions as $dropOptions){
+		
+    $parent_name=$readConnection->fetchRow("select name from amasty_finder_value where value_id=".$dropOptions['parent_id']);
+   // $parent_name=$readConnection->fetchRow("select name from amasty_finder_value where value_id=15");
+
+	 $parentName=$parent_name['name'];
+	 $chieldName=$dropOptions['name'];
+	 if(!$chieldName) 
+		 continue;
+	$matching_array=[];
+	############################################################################
+
+	############################################################################
+	$matching_array[]=array('match_pattern'=>trim($parentName).' '.trim($chieldName),'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'YM');  
+	$matching_array[]=array('match_pattern'=>trim($parentName).'-'.trim($chieldName),'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'YM');  
+	$matching_array[]=array('match_pattern'=>trim($parentName).'#'.trim($chieldName),'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'YM');  
+	$matching_array[]=array('match_pattern'=>trim($parentName).'+'.trim($chieldName),'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'YM');  
+	$matching_array[]=array('match_pattern'=>substr($parentName,0,3).' '.$chieldName,'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'YM');
+	$matching_array[]=array('match_pattern'=>substr($parentName,0,3).'-'.substr($chieldName,0,3),'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'YM');  
+	$matching_array[]=array('match_pattern'=>substr($parentName,0,3).'#'.substr($chieldName,0,3),'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'YM');  
+	$matching_array[]=array('match_pattern'=>substr($parentName,0,3).'+'.substr($chieldName,0,3),'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'YM');
+	$matching_array[]=array('match_pattern'=>substr($parentName,0,3).'+'.substr($chieldName,0,3),'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'YM');
+	$matching_array[]=array('match_pattern'=>substr($chieldName,0,3).'+'.substr($parentName,0,3),'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'YM');
+     $matching_array[]=array('match_pattern'=>$parentName,'match_finder'=>$parentName,'search_key'=>'Y');
+	 //$matching_array[]=array('match_pattern'=>$parentName.' ','match_finder'=>$parentName,'search_key'=>'Y');
+     $matching_array[]=array('match_pattern'=>$chieldName,'match_finder'=>$chieldName,'search_key'=>'M');
+     $matching_array[]=array('match_pattern'=>substr($chieldName,0,4),'match_finder'=>$chieldName,'search_key'=>'M');
+	 $matching_array[]=array('match_pattern'=>substr($chieldName,0,3),'match_finder'=>$chieldName,'search_key'=>'M');
+	 $matching_array[]=array('match_pattern'=>substr($parentName,0,3).$chieldName,'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'MMO');
+	 $matching_array[]=array('match_pattern'=>substr($parentName,0,4).$chieldName,'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'MMO');
+	 $matching_array[]=array('match_pattern'=>trim($parentName).substr($chieldName,0,3),'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'MMO');
+	 $matching_array[]=array('match_pattern'=>trim($parentName).substr($chieldName,0,3),'match_finder'=>$parentName.' '.$chieldName,'search_key'=>'MMO');
+	 $matching_array[]=array('match_pattern'=>trim($parentName).' '.trim($chieldName),'match_finder'=>trim($parentName).' '.trim($chieldName),'search_key'=>'MMO');
+	 foreach($matching_array as $matched){
+		
+       $readConnection->query("insert into search_patterns(match_finder,match_pattern,search_key) values ('".trim($matched['match_finder'])."','".trim($matched['match_pattern'])."','".$matched['search_key']."')");
+	   
+	}
+	}

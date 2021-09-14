@@ -1,0 +1,69 @@
+<!-- @ankitN start -->
+<?php $this->getModelCollectionByMake();?>
+<style>
+    .page-wrapper {
+        background-color: #000000;
+        color: #FFFFFF;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+    .amfinder-year {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -10%);
+    }
+
+    .amfinder-bg-image {
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+    #drop-year {
+        width: 467px;
+    }
+    .osc-form1 {
+        top: 34%;
+        position: absolute;
+        left: 29%;
+        text-align: center;
+    }
+    .oscp-dropdown {
+        width: 330px;
+        color: black;
+        font-size: 25px;
+        text-align: center;
+    }
+
+    body {
+        height: 100%;
+        background-color: black;
+        color: white;
+    }
+    #html-body {
+        background-color: black;
+        color: white;
+    }
+
+</style>
+
+<div class = "osc-form1">
+    <h1>Select to find your Model</h1>
+    <form name="osc-form" action="/action_page.php">
+
+
+        <select id="finder" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('Please Select...')); ?></option>
+            <?php foreach ($block->getModelCollectionByYearMake() as $x => $item): ?>
+                <option value="<?php echo $item['dropdown_id']?>"><?= $block->escapeHtml($item['name'])?></option>
+            <?php endforeach;?>
+        </select>
+
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+<!-- @ankitN end -->

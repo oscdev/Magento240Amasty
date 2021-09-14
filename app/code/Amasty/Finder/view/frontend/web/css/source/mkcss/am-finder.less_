@@ -1,0 +1,3 @@
+@import "../../../../../../../../../../lib/web/css/source/lib/_lib.less";
+@import "../../../../../../../../../../lib/web/css/source/lib/_responsive.less";
+@import '../_module.less';

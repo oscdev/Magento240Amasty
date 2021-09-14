@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="192.168.1.2" id="813a7ecb-0ed3-4cda-9e71-bf21e3923bbd" port="22" nameFormat="DESCRIPTIVE" username="magento241" />
+    </configs>
+  </component>
+</project>

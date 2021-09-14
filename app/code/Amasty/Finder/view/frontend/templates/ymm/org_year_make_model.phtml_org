@@ -1,0 +1,67 @@
+<style>
+
+    input {
+        margin-bottom: 38px;
+        padding: 5px 5px;
+    }
+</style>
+<?php
+/**
+ * @var $block \Amasty\Finder\Block\Ymm\Yearmakemodellist
+ */
+?>
+<?php $a = $this->getAllFinders(); ?>
+<?php /*print_r($block->getAllFinders())*/?>
+<!--<div class = "osc-form1">
+    <h1>Select to find your exhaust:</h1>
+
+    <form name="osc-form" action='amfinder/productfinder/index' method="post">
+        <?php /*foreach ($a as $index => $value) : */?>
+            <?php /*if (count($value) > 0) : */?>
+                <select onchange = "productlist()" id=<?/*= $index ;*/?> class="amfinder-select" name=<?/*= $index;*/?>>
+                    <option value= ".$index." ><?/*= $index;*/?></option>
+                    <?php /*foreach ($value as $i => $label) :*/?>
+                        <option value= ".$label." ><?/*= $block->escapeHtml(__($label));*/?></option>
+                    <?php /*endforeach */?>
+                </select>
+                <br><br>
+            <?php /*endif */?>
+        <?php /*endforeach */?>
+
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>-->
+<div class = "osc-form1">
+    <h1>Select to find your exhaust:</h1>
+    <form name="osc-form" action='amfinder/productfinder/index' method="post">
+
+    <select id="finder" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('SUBMODEL'));?></option>
+        </select>
+        <br><br>
+        <select id="finder" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('ENGINE'));?></option>
+        </select>
+        <br><br>
+        <select id="finder" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('BODY'));?></option>
+        </select>
+        <br><br>
+
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+
+
+   <script>
+         function productlist() {
+             alert('hi');
+             var text = document.getElementById("$index").value;
+             alert('text');
+             //document.getElementById("$index").innerHTML = "You selected: " + x;
+         }
+     </script>
+

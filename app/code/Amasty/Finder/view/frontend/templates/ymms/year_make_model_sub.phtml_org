@@ -1,0 +1,39 @@
+<style>
+    input {
+        margin-bottom: 38px;
+        padding: 5px 5px;
+    }
+</style>
+<?php
+/**
+ * @var $block \Amasty\Finder\Block\Ymms\Yearmakemodelsublist
+ */
+?>
+<?php $a = $this->getAllFinders(); ?>
+<?php /*print_r($block->getAllFinders())*/?>
+<div class = "osc-form1">
+    <h1>Select to find your exhaust:</h1>
+     <form name="osc-form" action='/action_page.php'>
+        <select id="finder" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('ENGINE'));?></option>
+        </select>
+        <br><br>
+        <select id="finder" class="amfinder-select">
+            <option value="0"><?= $block->escapeHtml(__('BODY'));?></option>
+        </select>
+        <br><br>
+
+
+
+
+        <!--<select id="finder" class="amfinder-select">
+            <option value="0"><?/*= $block->escapeHtml(__('Please Select...')); */?></option>
+            <?php /*foreach ($block->getModelCollectionByYearMake() as $x => $item): */?>
+                <option value="<?php /*echo $item['dropdown_id']*/?>"><?/*= $block->escapeHtml($item['name'])*/?></option>
+            <?php /*endforeach;*/?>
+        </select>-->
+
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>

@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2021 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+-->
+<!--
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amfinder" translate="label" type="text" sortOrder="161809" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <resource>Amasty_Finder::config_finder</resource>
+            <class>separator-top</class>
+            <label>Product Parts Finder</label>
+            <tab>amasty</tab>
+            <group id="amasty_information" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Information</label>
+                <frontend_model>Amasty\Finder\Block\Adminhtml\System\Config\Information</frontend_model>
+            </group>
+            <group id="general" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General</label>
+                <field id="partial_search" translate="label" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display `Find` Button when</label>
+                    <source_model>Amasty\Finder\Model\Source\Type</source_model>
+                </field>
+                <field id="category_search" translate="label" type="select" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Apply Filter for Current Category only</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>With Varnish cache this setting is ignored</comment>
+                </field>
+                <field id="custom_category" translate="label comment" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Global Custom Destination URL</label>
+                    <comment>Eg. special-category.html In most cases you don't need to set it. Useful when you want to
+                        redirect all search results to one category.
+                    </comment>
+                </field>
+                <field id="reset_home" translate="label" type="select" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Reset Finder</label>
+                    <source_model>Amasty\Finder\Model\Source\Reset</source_model>
+                </field>
+            </group>
+            <group id="advanced" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Advanced</label>
+                <field id="universal" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>Use `Universal` Products</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Allows to add set of products to any search, but might slow down the pages in some cases
+                    </comment>
+                </field>
+                <field id="universal_last" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Show `Universal` Products Last</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="universal">1</field>
+                    </depends>
+                </field>
+                <field id="auto_submit" translate="label" type="select" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Start Search when Value in the Last Dropdown is Selected</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="clear_other_conditions" translate="label" type="select" sortOrder="90" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Clear other (Previous) Finders Conditions</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Useful when you have 2 or more finders at the same page.</comment>
+                </field>
+                <field id="redirect_single_product" translate="label" type="select" sortOrder="100" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Redirect to Product Page when One Product in Result</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_chosen_enable" translate="label comment" type="select" sortOrder="110" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable 'Chosen' Plugin</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Chosen is a jQuery plugin that makes select boxes much more user-friendly and equips
+                        it with the search. Read more <a href="https://harvesthq.github.io/chosen/">here</a>]]></comment>
+                </field>
+                <field id="show_active_finder_options" translate="label comment" type="select" sortOrder="120" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Compatible Options At The Product Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Set 'Yes' to display finder filter options product is compatible with at the product page in the separate tab.</comment>
+                </field>
+                <field id="compatible_finder" translate="label comment" type="select" sortOrder="130" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Finder For Compatibility Tab</label>
+                    <source_model>Amasty\Finder\Model\Source\CompatibleFinder</source_model>
+                    <depends>
+                        <field id="show_active_finder_options">1</field>
+                    </depends>
+                    <comment>Specify which Product Finder content to display in Compatibility tab.</comment>
+                </field>
+                <field id="name_finder_options_tab" translate="label" type="text" sortOrder="140" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <depends>
+                        <field id="show_active_finder_options">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="import" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>Import</label>
+                <field id="archive_lifetime" translate="label comment" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Import History Lifetime (days)</label>
+                </field>
+                <field id="max_rows_per_import" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="0" showInStore="0">
+                    <label>Max Rows per Import</label>
+                    <comment>Recommended value is 1000. There may be import problems with larger value</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
